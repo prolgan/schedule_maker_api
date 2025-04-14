@@ -21,6 +21,10 @@ class WorkerRole
         return $this->id;
     }
 
+    #[ORM\ManyToOne(targetEntity: Team::class)]
+    #[ORM\JoinColumn(name: "team", referencedColumnName: "id", nullable: true)]
+    private Team $team;
+
     public function getRoleName(): string
     {
         return $this->roleName;
@@ -32,6 +36,17 @@ class WorkerRole
         return $this;
     }
 
+    public function getTeam(): Team
+    {
+        return $this->team;
+    }
+
+    public function setTeam(Team $team): self
+    {
+        $this->team = $team;
+        return $this;
+    }
+    
 
     
 }

@@ -3,7 +3,9 @@
 namespace App\Model;
 
 use Doctrine\ORM\Mapping as ORM;
+use ApiSkeletons\Doctrine\GraphQL\Annotation as GraphQL;
 
+#[GraphQL\Entity]
 #[ORM\Entity]
 #[ORM\Table(name: "users")]
 class User
@@ -11,18 +13,23 @@ class User
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: "integer")]
+    #[GraphQL\Field(type: "ID")]
     private int $id;
 
     #[ORM\Column(type: "string", length: 255)]
+    #[GraphQL\Field(type: "String")]
     private string $userName;
 
     #[ORM\Column(type: "string", length: 255)]
+    #[GraphQL\Field(type: "String")]
     private string $userSurname;
 
     #[ORM\Column(type: "string", length: 255)]
+    #[GraphQL\Field(type: "String")]
     private string $email;
 
     #[ORM\Column(type: "string", length: 255)]
+    #[GraphQL\Field(type: "String")]
     private string $password;
 
     public function getId(): int

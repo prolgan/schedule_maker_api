@@ -31,9 +31,20 @@ class Team
         return $this->teamName;
     }
 
+    public function getManager(): User
+    {
+        return $this->manager;
+    }
+
     public function setTeamName(string $teamName): self
     {
         $this->teamName = $teamName;
+        return $this;
+    }
+
+    public function setManager(User $manager): self
+    {
+        $this->manager = $manager;
         return $this;
     }
 

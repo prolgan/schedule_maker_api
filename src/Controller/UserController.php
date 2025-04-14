@@ -7,23 +7,14 @@ use GraphQL\Type\Definition\Type;
 
 use App\Model\User;
 
-class UserController extends ObjectType{
+class UserController
+{
 
     private $entityManager;
 
-    public function __construct(EntityManagerInterface $entityManager){
+    public function __construct(EntityManagerInterface $entityManager)
+    {
         $this->entityManager = $entityManager;
-
-        parent::__construct([
-            'name' => 'User',
-            'fields' => [
-                'id' => ['type' => Type::int()],
-                'userName' => ['type' => Type::string()],
-                'userSurname' => ['type' => Type::string()],
-                'email' => ['type' => Type::string()],
-                'password' => ['type' => Type::string()],                
-            ],
-        ]);
     }
 
 
@@ -42,7 +33,18 @@ class UserController extends ObjectType{
                 ]
             ];
         }
+        $users = $userRepo->findAll();
+        return array_map(fn(User $user) => [
+            'id' => $user->getId(),
+            'userName' => $user->getUserName(),
+            'userSurname' => $user->getUserSurname(),
+            'email' => $user->getEmail(),
+        ], $users);
 
-        
+
+
     }
+
+
+
 }
